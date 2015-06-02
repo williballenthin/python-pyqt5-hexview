@@ -653,7 +653,8 @@ class HexViewWidget(Base, UI, LoggingObject):
     def _handle_origins_changed(self):
         self._render_status_text()
 
-    def _handle_context_menu_requested(self, qpoint):
+    def get_context_menu(self, qpoint):
+        """ override this method to customize the context menu """
         menu = QMenu(self)
         index = self.view.indexAt(qpoint)
 
@@ -709,8 +710,10 @@ class HexViewWidget(Base, UI, LoggingObject):
         menu.addSeparator()  # -----------------------------------------------------------------
 
         add_action(menu, "Add origin", lambda: self._handle_add_origin(index))
+        return menu
 
-        menu.exec_(self.view.mapToGlobal(qpoint))
+    def _handle_context_menu_requested(self, qpoint):
+        self.get_context_menu(qpoint).exec_(self.view.mapToGlobal(qpoint))
 
     def _handle_color_selection(self, color=None):
         # qt seems to set non-existant keyword args to False, so we manually reset to None
