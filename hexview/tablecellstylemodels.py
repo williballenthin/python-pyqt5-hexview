@@ -6,10 +6,8 @@ from intervaltree import IntervalTree
 from PyQt5.QtCore import QObject
 from PyQt5.QtCore import pyqtSignal
 
-import os.path, sys
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 from mutablenamedtuple import mutablenamedtuple
-from ui.colortheme import SolarizedColorTheme
+from colortheme import SolarizedColorTheme
 
 
 def row_start_index(index):
