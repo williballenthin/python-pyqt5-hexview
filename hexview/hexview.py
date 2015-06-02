@@ -1,3 +1,4 @@
+import os
 import base64
 import binascii
 from collections import namedtuple
@@ -30,8 +31,6 @@ from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QItemDelegate
 from PyQt5.QtWidgets import QAbstractItemView
 
-import os.path, sys
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 from common import h
 from common import LoggingObject
 from tablecellstylemodels import row_start_index
@@ -551,8 +550,9 @@ class HexTableView(QTableView, LoggingObject):
 Origin = namedtuple("Origin", ["offset", "name"])
 
 
+uipath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "hexview.ui")
 # reference: http://stackoverflow.com/questions/10612467/pyqt4-custom-widget-uic-loaded-added-to-layout-is-invisible
-UI, Base = uic.loadUiType("ui/hexview.ui")
+UI, Base = uic.loadUiType(uipath)
 class HexViewWidget(Base, UI, LoggingObject):
     originsChanged = pyqtSignal()
 
