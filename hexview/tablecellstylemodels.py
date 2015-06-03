@@ -113,6 +113,8 @@ def compute_region_border(start, end):
 
     start_row = row_number(start)
     end_row = row_number(end)
+    if end % 0x10 == 0:
+        end_row -= 1
 
     ## topmost cells
     if start_row == end_row:
@@ -122,7 +124,7 @@ def compute_region_border(start, end):
         for i in xrange(start, row_end_index(start) + 1):
             cells[i].top = True
     # cells on second row, top left
-    if start_row != end_row and end != end_row * 0x10:
+    if start_row != end_row:
         next_row_start = row_start_index(start) + 0x10
         for i in xrange(next_row_start, next_row_start + column_number(start)):
             cells[i].top = True
@@ -143,7 +145,7 @@ def compute_region_border(start, end):
     ## leftmost cells
     if start_row == end_row:
         cells[start].left = True
-    elif end != end_row * 0x10:
+    else:
         second_row_start = row_start_index(start) + 0x10
         for i in xrange(second_row_start, row_start_index(end) + 0x10, 0x10):
             cells[i].left = True
