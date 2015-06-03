@@ -122,7 +122,7 @@ def compute_region_border(start, end):
         for i in xrange(start, row_end_index(start) + 1):
             cells[i].top = True
     # cells on second row, top left
-    if start_row != end_row:
+    if start_row != end_row and end != end_row * 0x10:
         next_row_start = row_start_index(start) + 0x10
         for i in xrange(next_row_start, next_row_start + column_number(start)):
             cells[i].top = True
@@ -143,7 +143,7 @@ def compute_region_border(start, end):
     ## leftmost cells
     if start_row == end_row:
         cells[start].left = True
-    else:
+    elif end != end_row * 0x10:
         second_row_start = row_start_index(start) + 0x10
         for i in xrange(second_row_start, row_start_index(end) + 0x10, 0x10):
             cells[i].left = True
@@ -195,12 +195,12 @@ class BorderModel(QObject):
     def clear_region(self, begin, end):
         span = end - begin
         to_remove = []
-        for range in self._db[begin:end]:
-            if range.end - range.begin - 1 == span:
-                to_remove.append(range)
-        for range in to_remove:
-            self._db.removei(range.begin, range.end, range.data)
-            self.rangeChanged.emit(range.data)
+        for r in self._db[begin:end]:
+            if r.end - r.begin - 1 == span:
+                to_remove.append(r)
+        for r in to_remove:
+            self._db.removei(r.begin, r.end, r.data)
+            self.rangeChanged.emit(r.data)
 
     def get_border(self, index):
         # ranges is a (potentially empty) list of intervaltree.Interval instances
