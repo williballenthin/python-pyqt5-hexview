@@ -95,7 +95,7 @@ class HexItemDelegate(QItemDelegate):
 
 
 class HexTableModel(QAbstractTableModel):
-    FILTER = ''.join([(len(repr(chr(x)))==3) and chr(x) or '.' for x in range(256)])
+    FILTER = ''.join([(len(repr(chr(x)))==3 or chr(x) == "\\") and chr(x) or '.' for x in range(256)])
 
     def __init__(self, buf, parent=None, *args):
         super(HexTableModel, self).__init__(parent, *args)
