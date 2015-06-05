@@ -6,8 +6,8 @@ from intervaltree import IntervalTree
 from PyQt5.QtCore import QObject
 from PyQt5.QtCore import pyqtSignal
 
-from mutablenamedtuple import mutablenamedtuple
-from colortheme import SolarizedColorTheme
+from .mutablenamedtuple import mutablenamedtuple
+from .colortheme import SolarizedColorTheme
 
 
 def row_start_index(index):

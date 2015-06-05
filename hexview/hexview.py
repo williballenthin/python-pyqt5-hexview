@@ -31,14 +31,14 @@ from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QItemDelegate
 from PyQt5.QtWidgets import QAbstractItemView
 
-from common import h
-from common import LoggingObject
-from tablecellstylemodels import row_start_index
-from tablecellstylemodels import row_end_index
-from tablecellstylemodels import row_number
-from tablecellstylemodels import ROLE_BORDER
-from tablecellstylemodels import ColorModel
-from tablecellstylemodels import BorderModel
+from .common import h
+from .common import LoggingObject
+from .tablecellstylemodels import row_start_index
+from .tablecellstylemodels import row_end_index
+from .tablecellstylemodels import row_number
+from .tablecellstylemodels import ROLE_BORDER
+from .tablecellstylemodels import ColorModel
+from .tablecellstylemodels import BorderModel
 
 NamedColor = namedtuple("NamedColor", ["name", "qcolor"])
 QT_COLORS = (
