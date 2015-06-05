@@ -168,7 +168,7 @@ class HexTableModel(QAbstractTableModel):
             if col == 0x10:
                 return ""
 
-            c = ord(self._buf[bindex])
+            c = self._buf[bindex]
             if col > 0x10:
                 return chr(c).translate(HexTableModel.FILTER)
             else:

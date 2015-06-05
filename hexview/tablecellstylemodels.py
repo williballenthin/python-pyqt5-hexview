@@ -118,28 +118,28 @@ def compute_region_border(start, end):
 
     ## topmost cells
     if start_row == end_row:
-        for i in xrange(start, end):
+        for i in range(start, end):
             cells[i].top = True
     else:
-        for i in xrange(start, row_end_index(start) + 1):
+        for i in range(start, row_end_index(start) + 1):
             cells[i].top = True
     # cells on second row, top left
     if start_row != end_row:
         next_row_start = row_start_index(start) + 0x10
-        for i in xrange(next_row_start, next_row_start + column_number(start)):
+        for i in range(next_row_start, next_row_start + column_number(start)):
             cells[i].top = True
 
     ## bottommost cells
     if start_row == end_row:
-        for i in xrange(start, end):
+        for i in range(start, end):
             cells[i].bottom = True
     else:
-        for i in xrange(row_start_index(end), end):
+        for i in range(row_start_index(end), end):
             cells[i].bottom = True
     # cells on second-to-last row, bottom right
     if start_row != end_row:
         prev_row_end = row_end_index(end) - 0x10
-        for i in xrange(prev_row_end - (0x10 - column_number(end) - 1), prev_row_end + 1):
+        for i in range(prev_row_end - (0x10 - column_number(end) - 1), prev_row_end + 1):
             cells[i].bottom = True
 
     ## leftmost cells
@@ -147,7 +147,7 @@ def compute_region_border(start, end):
         cells[start].left = True
     else:
         second_row_start = row_start_index(start) + 0x10
-        for i in xrange(second_row_start, row_start_index(end) + 0x10, 0x10):
+        for i in range(second_row_start, row_start_index(end) + 0x10, 0x10):
             cells[i].left = True
     # cells in first row, top left
     if start_row != end_row:
@@ -158,7 +158,7 @@ def compute_region_border(start, end):
         cells[end - 1].right = True
     else:
         penultimate_row_end = row_end_index(end) - 0x10
-        for i in xrange(row_end_index(start), penultimate_row_end + 0x10, 0x10):
+        for i in range(row_end_index(start), penultimate_row_end + 0x10, 0x10):
             cells[i].right = True
     # cells in last row, bottom right
     if start_row != end_row:
