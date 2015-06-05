@@ -13,4 +13,5 @@ setup(name="python-pyqt5-hexview",
       author_email="willi.ballenthin@gmail.com",
       url="https://github.com/williballenthin/python-pyqt5-hexview",
       license="Apache 2.0 License",
+      install_depends=["hexdump"],
       packages=["hexview"])

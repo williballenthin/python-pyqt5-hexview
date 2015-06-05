@@ -589,10 +589,10 @@ class HexViewWidget(Base, UI, LoggingObject):
 
         # TODO: provide a HexViewWidget.setModel method, and don't build it ourselves
         self.view.setModel(self._model)
-        for i in xrange(0x10):
+        for i in range(0x10):
             self.view.setColumnWidth(i, 23)
         self.view.setColumnWidth(0x10, 12)
-        for i in xrange(0x11, 0x22):
+        for i in range(0x11, 0x22):
             self.view.setColumnWidth(i, 11)
 
         self._hsm = HexItemSelectionModel(self._model, self.view)
@@ -783,7 +783,7 @@ def main(filename=None):
 
     if filename is None:
         buf = []
-        for i in xrange(0x100):
+        for i in range(0x100):
             buf.append(chr(i))
     else:
         with open(filename, "rb") as f:

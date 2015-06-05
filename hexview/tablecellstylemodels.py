@@ -22,7 +22,7 @@ def row_end_index(index):
 
 def row_number(index):
     """ get row number of the 0x10 byte row containing the given index """
-    return index / 0x10
+    return index // 0x10
 
 
 def column_number(index):
