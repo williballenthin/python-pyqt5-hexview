@@ -212,7 +212,7 @@ class HexTableModel(QAbstractTableModel):
             return None
 
     def _emit_data_changed(self, start_bindex, end_bindex):
-        for i in xrange(start_bindex, end_bindex):
+        for i in range(start_bindex, end_bindex):
             # mark data changed to encourage re-rendering of cell
             qib = self.index2qindexb(i)
             qic = self.index2qindexc(i)
