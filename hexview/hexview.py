@@ -782,9 +782,10 @@ def main(filename=None):
     import sys
 
     if filename is None:
-        buf = []
+        b = []
         for i in range(0x100):
-            buf.append(chr(i))
+            b.append(i)
+        buf = bytearray(b)
     else:
         with open(filename, "rb") as f:
             buf = f.read()
