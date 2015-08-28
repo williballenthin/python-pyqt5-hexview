@@ -1,4 +1,3 @@
-__version__ = "0.3"
 __all__ = ["HexViewWidget", "QT_COLORS", "make_color_icon"]
 
 from .hexview import HexViewWidget
