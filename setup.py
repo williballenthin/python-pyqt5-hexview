@@ -29,4 +29,10 @@ setup(name="python-pyqt5-hexview",
       install_requires=["hexdump", "intervaltree", "funcy"],
       packages=["hexview"],
       package_dir={"hexview": "hexview"},
-      package_data={"hexview": ["hexview.ui"]})
+      package_data={"hexview": ["hexview/hexview.ui"]},
+      entry_points={
+        "console_scripts": [
+            "hexview=hexview.scripts.hexview_bin:main",
+        ]
+      },
+)

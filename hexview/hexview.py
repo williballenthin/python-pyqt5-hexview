@@ -6,7 +6,6 @@ from collections import namedtuple
 import hexdump
 import intervaltree
 
-from PyQt5 import uic
 from PyQt5.QtGui import QIcon
 from PyQt5.QtGui import QBrush
 from PyQt5.QtGui import QPixmap
@@ -24,6 +23,7 @@ from PyQt5.QtCore import QItemSelectionModel
 from PyQt5.QtCore import QAbstractTableModel
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtWidgets import QAction
+from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QTableView
 from PyQt5.QtWidgets import QSizePolicy
 from PyQt5.QtWidgets import QApplication
@@ -31,6 +31,7 @@ from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QItemDelegate
 from PyQt5.QtWidgets import QAbstractItemView
 
+from .hexview_auto import Ui_Form as HexViewBase
 from .common import h
 from .common import LoggingObject
 from .tablecellstylemodels import row_start_index
@@ -550,14 +551,11 @@ class HexTableView(QTableView, LoggingObject):
 Origin = namedtuple("Origin", ["offset", "name"])
 
 
-uipath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "hexview.ui")
-# reference: http://stackoverflow.com/questions/10612467/pyqt4-custom-widget-uic-loaded-added-to-layout-is-invisible
-UI, Base = uic.loadUiType(uipath)
-class HexViewWidget(Base, UI, LoggingObject):
+class HexViewWidget(QWidget, HexViewBase, LoggingObject):
     originsChanged = pyqtSignal()
 
     def __init__(self, buf, parent=None):
-        super(HexViewWidget, self).__init__(parent)
+        super(HexViewWidget, self).__init__()
         self.setupUi(self)
         self._buf = buf
         self._model = HexTableModel(self._buf)
