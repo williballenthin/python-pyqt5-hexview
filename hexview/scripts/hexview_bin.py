@@ -1,3 +1,6 @@
+import os
+import sys
+import stat
 import mmap
 import contextlib
 
@@ -7,8 +10,16 @@ from PyQt5.QtWidgets import QApplication
 import hexview
 
 
-def _main(filename=None):
-    import sys
+def _main(filename=None, ooffset="0", olength="0"):
+    if ooffset.startswith("0x"):
+        offset = int(ooffset, 0x10)
+    else:
+        offset = int(ooffset)
+
+    if olength.startswith("0x"):
+        length = int(olength, 0x10)
+    else:
+        length = int(olength)
 
     if filename is None:
         b = []
@@ -17,7 +28,16 @@ def _main(filename=None):
         buf = bytearray(b)
     else:
         with open(filename, "rb") as f:
-            with contextlib.closing(mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)) as buf:
+            fno = f.fileno()
+            size = os.stat(filename)[stat.ST_SIZE]
+
+            if size > 0:
+                length = min(size, offset + length)
+
+            with contextlib.closing(mmap.mmap(f.fileno(), 
+                                    length, 
+                                    offset=offset, 
+                                    access=mmap.ACCESS_READ)) as buf:
                 app = QApplication(sys.argv)
                 w = PyQt5.QtWidgets.QFrame()
                 screen = hexview.HexViewWidget(buf, w)
