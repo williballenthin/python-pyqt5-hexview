@@ -774,26 +774,3 @@ class HexViewWidget(QWidget, HexViewBase, LoggingObject):
         name, ok = QInputDialog.getText(self, "Add origin...", "Origin name:")
         if ok and name:
             self.add_origin(Origin(index, name))
-
-
-def main(filename=None):
-    import sys
-
-    if filename is None:
-        b = []
-        for i in range(0x100):
-            b.append(i)
-        buf = bytearray(b)
-    else:
-        with open(filename, "rb") as f:
-            buf = f.read()
-
-    app = QApplication(sys.argv)
-    screen = HexViewWidget(buf)
-    screen.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == "__main__":
-    import sys
-    main(*sys.argv[1:])
