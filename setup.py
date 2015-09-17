@@ -19,7 +19,7 @@ from setuptools import setup
 
 description = "PyQt5 hex viewer widget."
 setup(name="python-pyqt5-hexview",
-      version="0.4.2",
+      version="0.4.3",
       description=description,
       long_description=description,
       author="Willi Ballenthin",
