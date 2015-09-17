@@ -1,3 +1,6 @@
+import mmap
+import contextlib
+
 import PyQt5.QtWidgets
 from PyQt5.QtWidgets import QApplication
 
@@ -14,13 +17,12 @@ def _main(filename=None):
         buf = bytearray(b)
     else:
         with open(filename, "rb") as f:
-            buf = f.read()
-
-    app = QApplication(sys.argv)
-    w = PyQt5.QtWidgets.QFrame()
-    screen = hexview.HexViewWidget(buf, w)
-    screen.show()
-    sys.exit(app.exec_())
+            with contextlib.closing(mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)) as buf:
+                app = QApplication(sys.argv)
+                w = PyQt5.QtWidgets.QFrame()
+                screen = hexview.HexViewWidget(buf, w)
+                screen.show()
+                sys.exit(app.exec_())
 
 
 def main():

@@ -170,6 +170,9 @@ class HexTableModel(QAbstractTableModel):
                 return ""
 
             c = self._buf[bindex]
+            if isinstance(c, str):
+                # python2.7 mmap is a str interface, not bytearray
+                c = ord(c)
             if col > 0x10:
                 return chr(c).translate(HexTableModel.FILTER)
             else:
