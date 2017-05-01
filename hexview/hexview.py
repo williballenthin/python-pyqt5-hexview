@@ -591,7 +591,7 @@ class HexViewWidget(QWidget, HexViewBase, LoggingObject):
         # TODO: provide a HexViewWidget.setModel method, and don't build it ourselves
         self.view.setModel(self._model)
         for i in range(0x10):
-            self.view.setColumnWidth(i, 23)
+            self.view.setColumnWidth(i, 25)
         self.view.setColumnWidth(0x10, 12)
         for i in range(0x11, 0x22):
             self.view.setColumnWidth(i, 11)
